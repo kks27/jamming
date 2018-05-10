@@ -8,7 +8,6 @@ class Track extends Component {
         super(props);
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
-        this.state = {};
     }
 
     addTrack()
