@@ -15,9 +15,7 @@ class App extends Component {
     this.state= {
        searchResults: [],
        playlistName: '',
-       playlistTracks:
-           [{id:'1',name:'biggie',artist:'biggiesmalls',album:'reaady to die'},
-               {id:'2',name:'nas',artist:'nases',album:'illmatic'},{name:'eminem',artist:'em',album:'marshall mathers'}],
+       playlistTracks: [],
 
   };
     this.addTrack = this.addTrack.bind(this);
@@ -72,7 +70,7 @@ class App extends Component {
 
     return (
       <div className="AppT">
-        <h1>Ja<span class="highlight">mmm</span>ing</h1>
+        <h1>Ja<span className="highlight">mmm</span>ing</h1>
           <div className="App">
             <SearchBar onSearch={this.search} />
                 <div className="App-playlist">
