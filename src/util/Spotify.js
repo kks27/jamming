@@ -69,18 +69,24 @@ const Spotify = {
                 )
                 .then(jsonResponse => {
                     userID = jsonResponse.id;
+                    console.log ("user Id" +userID);
                     return;
-                }).then(()=> {return(fetch(`https://api.spotify.com//v1/users/${userID}/playlists`,
+                }).then(()=> {return(fetch(`https://api.spotify.com/v1/users/${userID}/playlists`,
                     {
                         headers:headers,
                         method:'POST',
                         body:JSON.stringify({name: playListName})
-                    }).then(jsonResponse => { return playListID= jsonResponse.id })
+                    }).then(response => {  if (response.ok) {
+                            return response.json();
+                        }
+                            throw new Error('Request Failed!');
+                        }, networkError => console.log(networkError.message))
+                        .then(jsonResponse => { return playListID= jsonResponse.id })
                         .then(()=>{return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playListID}/tracks`,{
                             headers:headers,
                             method:'POST',
                             body: JSON.stringify({ uris: trackURIs })
-                        }).then(response => {return response.json()})})
+                        }).then(response => {return response.json()}).then(jsonResponse => {})})
 
                 )})
 
