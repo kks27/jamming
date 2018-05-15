@@ -86,7 +86,7 @@ const Spotify = {
                             let res = jsonResponse.items.map(playlist => ({
 
                                     name: playlist.name,
-
+                                    id: playlist.id
                                 })
                             );
                             // console.log(res);
