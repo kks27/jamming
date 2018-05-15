@@ -5,6 +5,7 @@ import SearchResults from  '../SearchResults/SearchResults';
 import Playlist from  '../Playlist/Playlist';
 import './App.css';
 import Spotify from '../../util/Spotify';
+import ListofPlayLists from "../ListofPlayLists/ListofPlayLists";
 
 
 
@@ -83,6 +84,7 @@ class App extends Component {
                         onNameChange={this.updatePlaylistName}
                         onSave={this.savePlaylist}
                     />
+                    <ListofPlayLists />
                 </div>
             </div>
     </div>

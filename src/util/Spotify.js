@@ -49,6 +49,53 @@ const Spotify = {
         });
     },
 
+    getCurrentUsersPlayLists()
+    {
+        let userID;
+        const accessToken= this.getAccessToken();
+        const headers = { Authorization: `Bearer ${accessToken}`};
+
+        return fetch(`https://api.spotify.com/v1/me`,
+            {
+                headers: headers
+            })
+            .then(response => {  if (response.ok) { return response.json();}
+                    throw new Error('Request Failed!'); },
+                    networkError => console.log(networkError.message)
+            )
+            .then(jsonResponse =>
+            {
+                userID = jsonResponse.id;
+                console.log ("user Id" +userID);
+                return;
+            })
+            .then(()=> {
+                return (fetch(`https://api.spotify.com/v1/users/${userID}/playlists`,
+                    {
+                        headers: headers,
+                    }))
+                    .then(response => {if (response.ok) {
+                            // console.log('response');
+                            return response.json(); }
+                    })
+                    .then(jsonResponse => {
+                        // console.log("kinne")
+                        // console.log(jsonResponse);
+                        // return jsonResponse;
+                        if(jsonResponse){
+                            let res = jsonResponse.items.map(playlist => ({
+
+                                    name: playlist.name,
+
+                                })
+                            );
+                            // console.log(res);
+                            return res;
+                        }
+
+
+                    })});
+    },
     savePlaylist(playListName, trackURIs)
     {
         let userID;
