@@ -6,27 +6,20 @@ class ListofPlayLists extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listOfPlayLists: [],
-        }
+            listOfPlayLists: [{id:1,name:'kinnu'},{id:2,name:'nbuggy'},{}],
+        },
         this.getListOfPlayLists = this.getListOfPlayLists.bind(this);
     }
 
     getListOfPlayLists() {
         console.log(`User has following playList`);
-        const playlist = Spotify.getCurrentUsersPlayLists().then(results => {
+        Spotify.getCurrentUsersPlayLists().then(results => {
             this.setState({listOfPlayLists: results});
             console.log(results);
 
         });
-        console.log(playlist);
-        // Spotify.getCurrentUsersPlayLists.then(results => {console.log(results)});
     }
 
-
-    /**        Spotify.getCurrentUsersPlayLists.then(results =>{
-            this.setState({listOfPlayLists: results});
-        } );
-    }**/
    componentWillMount()
    {
        this.getListOfPlayLists();
@@ -34,22 +27,11 @@ class ListofPlayLists extends Component {
 
     render(){
 
-        let listOfPlayLists = this.props.listOfPlayLists ? this.props.listOfPlayLists : [];
         return(
             <div className="Playlists">
                 <div className="Playlist-information">
-                    <h1>Current PlayLists</h1>
-
-
-                        {/*{this.state.listOfPlayLists.[0].name}*/}
-                            {
-                                listOfPlayLists.map(playlist => {
-                                    <h3>{playlist.name}</h3>
-
-
-                                }
-                            )}
-
+                    <h3>Current PlayLists</h3>
+                    {this.state.listOfPlayLists.map((playlist) => <li key={playlist.id}> {playlist.name} </li>)}
                 </div>
             </div>
         );
